@@ -7,11 +7,12 @@ import BlogsPage from "./Pages/Blogs";
 const urlEndpoint = "http://localhost:4000";
 
 function App() {
-  const [serverJSON, setServerJSON] = useState({ message: null });
+  const [serverJSON, setServerJSON] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiResponse = await fetch(`${urlEndpoint}/blogs/hello-blogs`);
+      const url = `${urlEndpoint}/blogs/all-blogs`;
+      const apiResponse = await fetch(url);
       const apiJSON = await apiResponse.json();
       setServerJSON(apiJSON);
       return;
@@ -22,25 +23,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/blogs"
-          element={<BlogsPage message={serverJSON.message} />}
-        ></Route>
+        {serverJSON && (
+          <Route
+            path="/blogs"
+            element={<BlogsPage blogs={serverJSON} />}
+          ></Route>
+        )}
       </Routes>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
     </div>
   );
 }
