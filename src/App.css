@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 
 .blogsDiv{
@@ -25,3 +26,36 @@ hr{
   color: gray;
   font-size: .8rem;
 }
+
+#sort, #filter{
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 2px solid white;
+  color: white;
+  margin: 0 10px;
+}
+
+[type="number"]{
+  max-width: 30px;
+}
+
+#limit, #page{
+  margin: 10px;
+  font-size: 14px;
+
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+p{
+  margin: 0;
+}
+
+[type="number"]:invalid{
+  outline: 1px solid red;
+}
+
