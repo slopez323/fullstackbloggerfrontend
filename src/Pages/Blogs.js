@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const BlogsPage = ({
   blogs,
   sort,
@@ -10,9 +12,12 @@ const BlogsPage = ({
   setLimit,
   page,
   setPage,
+  setSearch,
 }) => {
   const sortText = sort ? { fontWeight: "bold", color: "yellow" } : {};
   const filterText = filterField ? { fontWeight: "bold", color: "yellow" } : {};
+
+  const navigate = useNavigate();
   return (
     <div className="blogs-page">
       <h1>Blogs Page</h1>
@@ -70,6 +75,13 @@ const BlogsPage = ({
             onChange={(e) => setPage(e.target.value)}
           />
         </div>
+      </div>
+      <div className="options2">
+        <input
+          placeholder="Search in page"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button onClick={() => navigate("/post-blog")}>Add New Post</button>
       </div>
       <div className="blogsDiv">
         {blogs.map((blog) => {

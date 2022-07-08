@@ -44,6 +44,7 @@ const PostBlogPage = ({ blogSubmit }) => {
       >
         Submit
       </button>
+      <button onClick={() => navigate("/")}>Back to Home</button>
     </div>
   );
 };

@@ -16,6 +16,9 @@ function App() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
+  const [search, setSearch] = useState("");
+  const [searchedBlogs, setSearchedBlogs] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       let sortObj;
@@ -52,6 +55,23 @@ function App() {
     fetchFilterData();
   }, [filterField]);
 
+  useEffect(() => {
+    const searchFilter = () => {
+      if (search !== "") {
+        const filtered = serverJSON.filter(
+          (blog) =>
+            blog.title.toLowerCase().includes(search.toLowerCase()) ||
+            blog.author.toLowerCase().includes(search.toLowerCase()) ||
+            blog.text.toLowerCase().includes(search.toLowerCase()) ||
+            blog.category.toLowerCase().includes(search.toLowerCase())
+        );
+        setSearchedBlogs(filtered);
+      } else {
+      }
+    };
+    searchFilter();
+  }, [search]);
+
   const blogSubmit = async (blog) => {
     const url = `${urlEndpoint}/blogs/blog-submit`;
     const response = await fetch(url, {
@@ -71,7 +91,7 @@ function App() {
           index
           element={
             <BlogsPage
-              blogs={serverJSON}
+              blogs={search ? searchedBlogs : serverJSON}
               sort={sort}
               setSort={setSort}
               filterField={filterField}
@@ -82,6 +102,7 @@ function App() {
               setLimit={setLimit}
               page={page}
               setPage={setPage}
+              setSearch={setSearch}
             />
           }
         ></Route>
