@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { useEffect, useState } from "react";
 import BlogsPage from "./Pages/Blogs";
+import PostBlogPage from "./Pages/PostBlogPage";
 
 const urlEndpoint = "http://localhost:4000";
 
@@ -51,11 +52,23 @@ function App() {
     fetchFilterData();
   }, [filterField]);
 
+  const blogSubmit = async (blog) => {
+    const url = `${urlEndpoint}/blogs/blog-submit`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blog),
+    });
+    const responseJSON = await response.json();
+  };
+
   return (
     <div className="App">
       <Routes>
         <Route
-          path="/blogs"
+          index
           element={
             <BlogsPage
               blogs={serverJSON}
@@ -71,6 +84,10 @@ function App() {
               setPage={setPage}
             />
           }
+        ></Route>
+        <Route
+          path="/post-blog"
+          element={<PostBlogPage blogSubmit={blogSubmit} />}
         ></Route>
       </Routes>
     </div>
