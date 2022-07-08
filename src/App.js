@@ -29,7 +29,9 @@ function App() {
           ? `filterField=${filterField}&filterValue=${filterValue}&`
           : "";
 
-      const url = `${urlEndpoint}/blogs/all-blogs?${sortObj}${filter}limit=${limit}&page=${page}`;
+      const limitVal = limit > 0 ? limit : 10;
+
+      const url = `${urlEndpoint}/blogs/all-blogs?${sortObj}${filter}limit=${limitVal}&page=${page}`;
       const apiResponse = await fetch(url);
       const apiJSON = await apiResponse.json();
       setServerJSON(apiJSON);
