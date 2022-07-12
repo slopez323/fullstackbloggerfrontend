@@ -4,6 +4,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import BlogsPage from "./Pages/Blogs";
 import PostBlogPage from "./Pages/PostBlogPage";
+import DeleteBlog from "./Pages/DeleteBlog";
 
 const urlEndpoint = "http://localhost:4000";
 
@@ -18,6 +19,8 @@ function App() {
 
   const [search, setSearch] = useState("");
   const [searchedBlogs, setSearchedBlogs] = useState([]);
+
+  const [responseJSON, setResponseJSON] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +45,7 @@ function App() {
       return;
     };
     fetchData();
-  }, [sort, filterValue, limit, page]);
+  }, [sort, filterValue, limit, page, responseJSON]);
 
   useEffect(() => {
     const fetchFilterData = async () => {
@@ -81,7 +84,14 @@ function App() {
       },
       body: JSON.stringify(blog),
     });
-    const responseJSON = await response.json();
+    setResponseJSON(await response.json());
+  };
+
+  const blogDelete = async (id) => {
+    const url = `${urlEndpoint}/admin/delete-blog/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
   };
 
   return (
@@ -105,11 +115,15 @@ function App() {
               setSearch={setSearch}
             />
           }
-        ></Route>
+        />
         <Route
           path="/post-blog"
           element={<PostBlogPage blogSubmit={blogSubmit} />}
-        ></Route>
+        />
+        <Route
+          path="/delete-blog"
+          element={<DeleteBlog blogDelete={blogDelete} />}
+        />
       </Routes>
     </div>
   );
