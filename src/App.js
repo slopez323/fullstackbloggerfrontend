@@ -20,7 +20,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [searchedBlogs, setSearchedBlogs] = useState([]);
 
-  const [responseJSON, setResponseJSON] = useState({});
+  const [serverResponse, setServerResponse] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ function App() {
       return;
     };
     fetchData();
-  }, [sort, filterValue, limit, page, responseJSON]);
+  }, [sort, filterValue, limit, page, serverResponse]);
 
   useEffect(() => {
     const fetchFilterData = async () => {
@@ -84,7 +84,7 @@ function App() {
       },
       body: JSON.stringify(blog),
     });
-    setResponseJSON(await response.json());
+    setServerResponse(response);
   };
 
   const blogDelete = async (id) => {

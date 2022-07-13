@@ -23,11 +23,14 @@ const BlogsPage = ({
       <h1>Blogs Page</h1>
       <div className="options">
         <select
+          defaultValue={sort}
           onChange={(e) => setSort(e.target.value)}
           id="sort"
           style={sortText}
         >
           <option value="">Sort</option>
+          <option value="id-1">ID ↑</option>
+          <option value="id--1">ID ↓</option>
           <option value="title-1">Title ↑</option>
           <option value="title--1">Title ↓</option>
           <option value="author-1">Author ↑</option>
