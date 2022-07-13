@@ -23,7 +23,8 @@ hr{
   border: 2px solid gray;
 }
 
-.blogPost span{
+.blogPost span,
+.blogManager span{
   font-weight: bold;
   color: gray;
   font-size: .8rem;
@@ -70,4 +71,27 @@ p{
 textarea{
   width: 300px;
   height: 200px;
+}
+
+.blogManager-container{
+  text-align: center;
+}
+
+.blogManager-container h1{
+  color: blue;
+}
+
+.blogManager{
+  margin: 30px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.blogCard{
+  background-color:whitesmoke;
+  padding: 10px;
+ border: 1px solid gray; 
+ border-radius: 10px;
 }

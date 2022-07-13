@@ -4,7 +4,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import BlogsPage from "./Pages/Blogs";
 import PostBlogPage from "./Pages/PostBlogPage";
-import DeleteBlog from "./Pages/DeleteBlog";
+import BlogManager from "./Pages/BlogManager";
 
 const urlEndpoint = "http://localhost:4000";
 
@@ -16,6 +16,7 @@ function App() {
   const [filterValue, setFilterValue] = useState("");
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
+  const [adminBlogList, setAdminBlogList] = useState([]);
 
   const [search, setSearch] = useState("");
   const [searchedBlogs, setSearchedBlogs] = useState([]);
@@ -75,6 +76,16 @@ function App() {
     searchFilter();
   }, [search]);
 
+  useEffect(() => {
+    const fetchAdminBlogList = async () => {
+      const data = await fetch(`${urlEndpoint}/admin/blog-list`);
+      const json = await data.json();
+      setAdminBlogList(json);
+      return json;
+    };
+    fetchAdminBlogList();
+  }, [serverResponse]);
+
   const blogSubmit = async (blog) => {
     const url = `${urlEndpoint}/blogs/blog-submit`;
     const response = await fetch(url, {
@@ -87,11 +98,12 @@ function App() {
     setServerResponse(response);
   };
 
-  const blogDelete = async (id) => {
+  const deleteBlog = async (id) => {
     const url = `${urlEndpoint}/admin/delete-blog/${id}`;
     const response = await fetch(url, {
       method: "DELETE",
     });
+    setServerResponse(response);
   };
 
   return (
@@ -121,8 +133,13 @@ function App() {
           element={<PostBlogPage blogSubmit={blogSubmit} />}
         />
         <Route
-          path="/delete-blog"
-          element={<DeleteBlog blogDelete={blogDelete} />}
+          path="/blog-manager"
+          element={
+            <BlogManager
+              adminBlogList={adminBlogList}
+              deleteBlog={deleteBlog}
+            />
+          }
         />
       </Routes>
     </div>
