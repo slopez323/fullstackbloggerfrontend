@@ -12,7 +12,7 @@
 .blogsDiv{
   background-color: whitesmoke;
   color: black;
-  max-width: 90vw;
+  width: 90vw;
   box-sizing: border-box;
   border-radius: 5px;
   margin-bottom: 50px;

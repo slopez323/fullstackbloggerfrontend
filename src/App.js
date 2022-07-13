@@ -46,9 +46,10 @@ function App() {
       return;
     };
     fetchData();
-  }, [sort, filterValue, limit, page, serverResponse]);
+  }, [sort, filterField, filterValue, limit, page, serverResponse]);
 
   useEffect(() => {
+    setFilterValue("");
     const fetchFilterData = async () => {
       const url = `${urlEndpoint}/blogs/all-blogs`;
       const apiResponse = await fetch(url);
@@ -119,6 +120,7 @@ function App() {
               filterField={filterField}
               setFilterField={setFilterField}
               filterOptions={filterOptions}
+              filterValue={filterValue}
               setFilterValue={setFilterValue}
               limit={limit}
               setLimit={setLimit}

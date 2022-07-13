@@ -7,6 +7,7 @@ const BlogsPage = ({
   filterField,
   setFilterField,
   filterOptions,
+  filterValue,
   setFilterValue,
   limit,
   setLimit,
@@ -39,6 +40,7 @@ const BlogsPage = ({
           <option value="createdAt--1">Created At ↓</option>
         </select>
         <select
+          defaultValue={filterField}
           onChange={(e) => setFilterField(e.target.value)}
           id="filter"
           style={filterText}
@@ -49,6 +51,7 @@ const BlogsPage = ({
         </select>
         {filterField && (
           <select
+            defaultValue={filterValue}
             onChange={(e) => setFilterValue(e.target.value)}
             id="filterOptions"
           >
