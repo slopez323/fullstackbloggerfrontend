@@ -95,3 +95,10 @@ textarea{
  border: 1px solid gray; 
  border-radius: 10px;
 }
+
+.cardActions{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

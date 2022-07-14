@@ -107,6 +107,14 @@ function App() {
     setServerResponse(response);
   };
 
+  const fetchSingleBlog = async (blogId) => {
+    const url = `${urlEndpoint}/blogs/single-blog/${blogId}`;
+    const response = await fetch(url);
+    setServerResponse(response);
+    const responseJSON = await response.json();
+    return responseJSON;
+  };
+
   return (
     <div className="App">
       <Routes>
@@ -140,6 +148,9 @@ function App() {
             <BlogManager
               adminBlogList={adminBlogList}
               deleteBlog={deleteBlog}
+              fetchSingleBlog={fetchSingleBlog}
+              urlEndpoint={urlEndpoint}
+              setServerResponse={setServerResponse}
             />
           }
         />

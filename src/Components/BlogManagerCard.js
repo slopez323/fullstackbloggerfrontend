@@ -1,4 +1,4 @@
-const BlogManagerCard = ({ blog, deleteBlog }) => {
+const BlogManagerCard = ({ blog, deleteBlog, fetchBlogAndShow }) => {
   return (
     <div className="blogCard">
       <p>
@@ -21,7 +21,10 @@ const BlogManagerCard = ({ blog, deleteBlog }) => {
         <span>ID: </span>
         {blog.id}
       </p>
-      <button onClick={() => deleteBlog(blog.id)}>Delete</button>
+      <div className="cardActions">
+        <button onClick={() => fetchBlogAndShow(blog.id)}>Edit</button>
+        <button onClick={() => deleteBlog(blog.id)}>Delete</button>
+      </div>
     </div>
   );
 };
